@@ -1,0 +1,80 @@
+<%- include('header') %>
+<div class="container my-4">
+    <h3>My Todos</h3>
+</div>
+
+<div class="container">
+    <a href="/create-todo" class="border-shadow">
+        <span class="text-gradient">New Todo</span>
+    </a>
+</div>
+<div class="container mt-4">
+    <input type="radio" name="filter" id="filter1" onclick="window.location='/?done=true'">
+    <label for="filter1" >Done</label>
+    <input type="radio" name="filter" id="filter2" onclick="window.location=`/?upcoming=${new Date().toISOString()}`">
+    <label for="filter2" >Upcoming</label>
+    <input type="radio" name="filter" id="filter3" onClick="window.location='/'">
+    <label for="filter3" >All</label>
+</div>
+
+<div class="container mt-4">
+<% for(let i=0;i<todos.length;i++){ %>
+
+
+  <div class="card mx-auto my-4">
+    <div class="card-body">
+      <h5 class="card-title">
+       <% if (todos[i].done){ %>
+        <s><%=todos[i].title %></s>
+        <% } else { %>
+          <%=todos[i].title %>
+        <% } %>
+      </h5>
+      <p class="card-text">
+        <% if (todos[i].done){ %>
+          <s><%=todos[i].description %></s>
+          <% } else { %>
+            <%=todos[i].description %>
+          <% } %>
+      </p>
+  
+ <div class="d-flex justify-content-center">
+  <a href="#" class="btn btn-success mx-2" onClick="done('<%=todos[i]._id%>')" %>>Done</a>
+  <a href="/update-todo?id=<%=todos[i]._id%>" class="btn btn-secondary mx-2" >Edit</a>
+  <a href="#" class="btn btn-danger mx-2" onClick="deleteTodo('<%=todos[i]._id%>')">Delete</a>
+ </div>
+    </div>
+    <div class="card-footer text-muted">
+     Deadline: <%=new Date(`${todos[i].date}`).toLocaleString()%>
+    </div>
+  </div>
+  
+  <% } %>
+</div>
+
+
+</div>
+
+<script>
+
+function reloadPage(){
+
+  location.reload();
+}
+
+
+function done(id){
+  fetch(`http://localhost:8080/todos/update/${id}`,{method:"POST",headers:{'Content-Type':'application/json'},body:JSON.stringify({done:true})}).then(data=>reloadPage())}
+
+  function deleteTodo(id){
+    fetch(`http://localhost:8080/todos/${id}`,{method:"DELETE",headers:{'Content-Type':'application/json'}}).then(data=>reloadPage())
+  }
+
+  function updateTodo(id){
+    fetch(`http://localhost:8080/update-todo?id=${id}`,{method:"GET",headers:{'Content-Type':'application/json'}}).catch(err=>console.log(err))
+  }
+
+
+</script>
+
+<%- include('footer') %>

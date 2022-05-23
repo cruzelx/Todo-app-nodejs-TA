@@ -1,0 +1,22 @@
+# POST http://localhost:8080/
+# Content-Type: application/json
+
+# {
+#     "title":"Create Go API",
+#     "description":"RESTFul api with MongoDB as database",
+#     "date": "2022-05-18"
+# }
+
+
+
+# GET http://localhost:8080/
+# Content-Type: application/json
+
+
+PATCH http://localhost:8080/6289124f39ce669ff451fdb2
+Content-Type: application/json
+{
+     "title":"Create Go API",
+    "description":"RESTFul api with MongoDB as database",
+    "date": "2022-05-18"
+}

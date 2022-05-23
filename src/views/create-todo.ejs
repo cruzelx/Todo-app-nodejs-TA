@@ -1,0 +1,68 @@
+<%- include("header") %>
+<div class="container">
+  <h3 class="my-4">Create Todo</h3>
+  <div class="container-fluid">
+    <a href="/" class="border-shadow">
+      <span class="text-gradient">Show all todos</span>
+    </a>
+  </div>
+  <form name="form" id="form" method="POST" action="/todos">
+    <div class="form-group my-4">
+      <label for="title" class="form-label">Title</label>
+      <input
+        type="text"
+        class="form-control"
+        name="title"
+        id="title"
+        required
+      />
+    </div>
+
+    <div class="form-group my-4">
+      <label for="description" class="form-label">Description</label>
+      <textarea
+        type="description"
+        class="form-control"
+        name="description"
+        id="description"
+        required
+      ></textarea>
+    </div>
+    <div class="form-group my-4">
+      <label for="date" class="form-label">Deadline</label>
+      <div class="d-flex flex-row">
+        <input
+          type="datetime-local"
+          class="form-control"
+          name="date"
+          id="date"
+          required
+        />
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+<script>
+  // function createTodo() {
+  //   let formData = {};
+  //   formData.title = document.getElementById("title").value;
+  //   formData.description = document.getElementById("description").value;
+  //   formData.date = document.getElementById("date").value;
+
+  //   fetch("http://localhost:8080/todos/", {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify(formData),
+  //   }).then((data) => console.log(data));
+  // }
+  // function formSubmit(e) {
+  //   createTodo();
+  //   e.preventDefault();
+  //   e.stopPropagation();
+  //   // document.getElementById("form").reset();
+  // }
+</script>
+<%- include("footer") %>
